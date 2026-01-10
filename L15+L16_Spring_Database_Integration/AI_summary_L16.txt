@@ -1,0 +1,34 @@
+Quick recap
+
+The session focused on integrating databases into Spring Boot projects, covering the setup of dependencies and explaining how to structure a simple employee management system using SQL databases like MySQL. The discussion explored the architecture of server-side applications, including the interaction between different layers like controller, service, repository, and model, while also covering concepts like interfaces and polymorphism. The team then delved into specific database operations and SQL queries, including the use of prepared statements and methods for executing queries, while also discussing best practices for API documentation and dependency injection in Spring Boot applications.
+
+Next steps
+- GeeksforGeeks: Push the current code to GitHub and notify the group on WhatsApp.
+- All participants: Try implementing update and delete API operations on their own before the next class.
+- All participants: Complete the select (get) APIs in the next class (implied as a follow-up from the meeting).
+
+Summary
+
+SQL Database Integration in Spring Boot
+GeeksforGeeks led a session on integrating databases into a project, focusing on MySQL but allowing flexibility to use other SQL databases like PostgreSQL or Oracle. They explained how to set up dependencies in a Spring Boot project and emphasized that the core code remains consistent across SQL databases, with only the driver dependency differing based on the local database setup. The session also covered the architecture of a simple employee management system, discussing the roles of the controller, service layer, and DAO layer in the MVC framework, and how they interact with the frontend and database.
+
+Server-Side Application Architecture Overview
+The discussion focused on the architecture of a server-side application, explaining the layers involved: controller, service, repository, and model. The instructor explained how requests flow through these layers, with the controller receiving requests, the service layer handling business logic, and the repository interacting with the database. They also covered the concept of interfaces and their implementation classes, explaining how interfaces can enable different implementations of the same functionality, like immediate vs. scheduled orders in an e-commerce system. The instructor clarified that while this pattern resembles polymorphism, it's actually more about choosing different implementations based on input parameters rather than function signatures.
+
+Employee Data Architecture Design
+GeeksforGeeks explained the structure of a layered code architecture for managing employee data, including a controller layer, services layer, repository layer, and model layer. They discussed the importance of server-generated unique IDs for database records, explaining that IDs should not be controlled by end users to maintain data integrity. GeeksforGeeks also covered the concept of Data Transfer Objects (DTOs) and emphasized that while email addresses and phone numbers can be required to be unique, they should not be used as primary keys in the database to avoid issues when these details change.
+
+Spring Boot API Documentation Best Practices
+The discussion focused on API documentation and best practices for handling data in Spring Boot applications. GeeksforGeeks explained the importance of using DTO classes instead of models for API inputs to hide internal data structures and facilitate automatic documentation generation tools like Swagger. They also discussed the practice of returning complete data from APIs, even if some fields are hidden in the UI, due to the need for front-end checks and validations. The conversation concluded with an explanation of Spring Boot's dependency injection features and the use of specific annotations like @Service to make code more readable and maintainable.
+
+Employee Management System Database Design
+The team discussed creating a database table and repository for an employee management system. They decided to create the table during application startup using a constructor, with the table creation query being wrapped in an "if not exists" condition to prevent multiple creations. They explored two approaches to dependency injection, comparing field injection and constructor injection, with constructor injection being preferred when field values are needed inside the constructor. The team also covered JDBC connectivity and SQL syntax, including the use of auto-increment for ID generation and proper table creation with primary keys.
+
+Database Connection and Query Execution
+The team discussed database connection management and SQL query execution methods. GeeksforGeeks explained that creating a new database connection for each ePay call is inefficient and proposed implementing a singleton pattern to reuse connections. They also clarified the differences between execute, executeUpdate, and executeQuery methods, explaining that executeQuery is used for select statements to return result sets, executeUpdate returns the number of rows affected for DML queries, and execute returns true or false based on whether the first result is a result set object. The discussion concluded with GeeksforGeeks emphasizing that while all three methods execute queries, their primary use cases differ based on the type of result expected.
+
+SQL Query Execution Methods
+The discussion focused on SQL queries and their execution methods. GeeksforGeeks explained the difference between static and prepared statements, highlighting that prepared statements use placeholders and can be cached by the database server for performance optimization, particularly beneficial for complex queries. They demonstrated how to write both types of queries and emphasized the importance of using prepared statements where possible to reduce query compilation time. The group also discussed the use of the execute function for checking table existence and data presence, clarifying its limitations and appropriate use cases.
+
+SQL and Java Database Operations
+The meeting focused on explaining SQL queries and database operations using Java. GeeksforGeeks demonstrated how to create prepared statements and insert data into a database, highlighting the use of auto-increment IDs and the importance of avoiding duplicate key exceptions. The discussion also covered the difference between compile-time and runtime polymorphism, with a detailed explanation of method overloading and overriding. The session concluded with a clarification on the use of table annotations and the upcoming topics of Spring Data JPA and Hibernate.

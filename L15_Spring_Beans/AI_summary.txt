@@ -1,0 +1,35 @@
+Quick recap
+
+The meeting covered Spring Boot's dependency injection and bean management, focusing on singleton and prototype scopes and their different behaviors in application startup and object creation. The discussion explored Java annotations, including their creation, usage, and retention policies, with examples demonstrating how annotations affect bytecode and JVM behavior. The session concluded with an overview of data storage options and a brief outline of the upcoming course schedule, which will cover databases and backend development topics.
+
+Next steps
+Next steps were not generated due to insufficient transcript.
+
+Summary
+
+Spring Boot Bean Scopes Overview
+The instructor demonstrated Spring Boot dependency injection and bean scopes, explaining how singleton beans are created once during application startup while prototype beans are created on demand. They showed how to create and inject configuration classes using component annotations, and demonstrated that a single instance of a singleton bean is shared across multiple controllers. The instructor then explained that changing the bean scope from singleton to prototype would result in different behavior, with each controller receiving its own instance of the bean.
+
+Singleton vs Prototype Bean Scopes
+The discussion focused on explaining the differences between singleton and prototype bean scopes in Spring. GeeksforGeeks explained that in singleton scope, a single object is created during application startup and shared across all classes, while in prototype scope, a new object is created each time it's requested. They demonstrated this behavior using a PersonConfig class as a dependency in two controllers, showing how changes to the object in one controller did not affect its value in another controller when using prototype scope, unlike when using singleton scope. The explanation was supported by logs showing that only singleton beans are logged during startup, while prototype beans are not.
+
+Spring Bean Scopes and Configuration
+The discussion focused on Spring Framework's bean scopes, particularly singleton and prototype, with an emphasis on default singleton behavior. The instructor explained how to create beans for classes that cannot have component annotations, such as Jackson's ObjectMapper, by defining a configuration class with @Configuration annotation and implementing methods to return desired objects. They demonstrated how Spring Boot automatically invokes these methods during startup through inversion of control, allowing objects to be created and configured without explicit instantiation in the controller.
+
+Spring Object Mapper Scope Demonstration
+The discussion focused on understanding how different object mapper configurations affect bean creation and scope in a Spring application. GeeksforGeeks explained that when using auto-wiring, the same object was being used across multiple API calls because auto-wiring happens at the class level. However, when changing the scope to prototype and using the demo config to get the object mapper, a new object was created each time the API was called, as the usage of getObjectMapper was now happening at the API level. This demonstrated the importance of understanding how scope and auto-wiring interact in Spring applications.
+
+Spring Boot Auto-wiring Behavior Analysis
+The discussion focused on understanding the behavior of Spring Boot's auto-wiring and bean scopes. GeeksforGeeks explained how auto-wiring a configuration class versus a bean class affects object creation and reusability, particularly when using singleton and prototype scopes. The key conclusion was that when auto-wiring a configuration class, the bean scope of the configuration does not impact the behavior, as the function is only called once during auto-wiring. However, when directly auto-wiring a bean class, the scope of the bean function determines whether a new object is created for each API call. The team also discussed the limitations of auto-wiring at the function level, noting that it can only be applied at the class level.
+
+Spring Boot Bean Management Overview
+The discussion focused on Spring Boot's component scanning and bean management. GeeksforGeeks explained how Spring Boot creates beans from classes within the default package and demonstrated how to configure component scanning for classes in other packages using the @ComponentScan annotation. They also covered bean scopes, showing that singletons are created once and reused across API calls, and emphasized the importance of understanding code rather than relying on execution for explanations during interviews. The conversation concluded with a brief mention of retention policies and the functionality of annotations in Spring Boot.
+
+Java Annotations: Creation and Usage
+The discussion focused on Java annotations, their creation, and usage. DEEPAK explained that annotations are interfaces with functions that can be defined using the '@' symbol, and demonstrated how libraries like Reflections can utilize annotations at runtime. He emphasized that custom annotations require associated interceptor logic to be useful, and described the importance of meta-annotations like 'Target' and 'Retention' in defining an annotation's scope and lifecycle. The session concluded with an explanation of the three retention policies: 'Source' (discarded by compiler), 'Class' (recorded in bytecode but not used at runtime), and 'Runtime' (retained and可读取).
+
+Java Annotation Retention Policies
+The discussion focused on Java annotations and their retention policies, with Anuradha explaining the differences between source, runtime, and class-level retention policies. She used examples like the @Override annotation (retention policy: source) and the @RestController annotation (retention policy: runtime) to illustrate how these policies affect bytecode and JVM behavior. The class-level retention policy was also discussed, with Anuradha mentioning examples like the preview feature annotation, though she noted that class-level annotations are less common in Java development.
+
+Java Annotations and Data Storage
+The instructor discussed Java annotations, explaining that most annotations are runtime-based and used for developer communication rather than bytecode manipulation. They covered the basics of dependency injection and value annotations for primitive data types. The class concluded with a discussion on data storage options, comparing in-memory storage to disk-based storage, including advantages like persistence and disadvantages like cost and potential inconsistency. The instructor also outlined the upcoming course schedule, which includes covering SQL and NoSQL databases, Hibernate, Spring Data JPA, and minor projects, with a focus on backend development.

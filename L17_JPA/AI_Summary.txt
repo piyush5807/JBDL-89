@@ -1,0 +1,39 @@
+Quick recap
+The meeting focused on teaching Java programming concepts, specifically covering database connectivity, JPA, and Hibernate. The instructor demonstrated how to create REST APIs for CRUD operations using Spring Boot, including the implementation of get and post methods for employee management. They explained the challenges of manual SQL queries and introduced Lombok as a tool to reduce boilerplate code through annotations like @Getter, @Setter, and @Builder. The session concluded with a discussion about different approaches to modeling library books, comparing inventory management systems and library systems, before setting up a new project to explore JPA and Hibernate in the next class.
+
+Next steps
+- All participants: Try to implement the update (PUT/PATCH) and delete APIs for the employee project by themselves before the next session; if facing issues, discuss in tomorrow's class.
+- GeeksforGeeks: Push last week's code to the repository today.
+- Aditya: Share screen/code with GeeksforGeeks after class (or tomorrow) to debug Lombok-related issues when communicating between microservices via API calls.
+
+Summary
+
+API Development for Employee Data
+The instructor continued the previous week's code discussion, focusing on creating APIs for retrieving employee data. They demonstrated how to write a getEmployee API by ID and a getEmployees API to retrieve all records. The instructor explained the use of prepared statements and result sets to fetch data from the database. They also showed how to handle exceptions and test the APIs using a browser. The instructor identified and fixed a bug in the code related to column naming.
+
+Database Connection Code Challenges
+The team discussed challenges with their current code for connecting a web server to a database server. Arghadeep pointed out that the code is not scalable, as it requires setting getter and setter methods for each field, and would become inefficient with a large number of fields. They also discussed the difficulty of adding new columns to the database and the potential for errors when altering table structures. The team agreed that using column indices instead of names could help mitigate some of these issues, but noted that this approach has its own limitations.
+
+ORM Benefits and Implementation Overview
+The discussion focused on Object-Relational Mapping (ORM) and its benefits, particularly using frameworks like Hibernate. The speaker explained that ORM tools help developers avoid manual SQL queries by automatically mapping Java objects to SQL tables, which enhances productivity and reduces errors. They also outlined the creation of update and delete APIs for an employee management system, including how to handle parameter updates and deletions using prepared statements. The speaker offered to cover the implementation of these APIs in the next session, giving participants the option to attempt the implementation themselves.
+
+JPA and Spring Boot Setup
+The instructor explained how to connect to a database using custom SQL queries and introduced a new project that will use JPA (Java Persistence API) with Hibernate as the ORM. They demonstrated how to set up dependencies in a new Spring Boot project, including web, SQL, Spring Data JPA, and Lombok. The instructor also clarified how request body values are automatically assigned when making POST requests, explaining the role of request mapping, handler mapping, and object mapper in converting JSON data to Java classes.
+
+Model and DTO Class Management
+Mohammed asked about the behavior of models and DTOs with the same class names, and GeeksforGeeks explained that while DTOs can be used in some contexts, models are required for repository classes in JPA Hibernate projects, necessitating conversion from DTO to model. GeeksforGeeks demonstrated how message converters handle JSON to Java object mapping by parameter name matching, and explained that removing the @RequestBody annotation would result in a compilation error. The discussion concluded with an explanation of how Spring Boot handles 404 errors in REST controllers compared to earlier versions, which would previously return a 500 error.
+
+JPA vs Hibernate Overview
+The instructor explained the difference between JPA and Hibernate, clarifying that JPA is an interface or contract that developers use, while Hibernate is the underlying implementation that handles database interactions. They demonstrated a basic Spring Boot application and showed how to set up JPA and Hibernate for database access. The instructor also discussed how to configure an embedded database in the application properties file, as the current setup was missing the database URL and other required configurations.
+
+Spring Boot Embedded Database Discussion
+The discussion focused on embedded databases in Spring Boot, where GeeksforGeeks explained that embedded databases like H2 don't require separate server installations and are automatically initialized when the application starts. The team then discussed creating a book model for a library application, identifying attributes like book ID, author name, genre, publisher name, edition, availability status, and timestamp for when the book was added. They clarified that while book issuance details would be stored in a separate transactions class, the book model would initially focus on basic attributes without quantity tracking, though this could be added later.
+
+Digital Library App Design Discussion
+GeeksforGeeks explained two approaches to storing library book information: treating books as individual entities with unique IDs and tracking their availability, or treating books as a product with multiple copies. Rutuja preferred the second scenario where each book has its own identity, which would make it easier to track specific books and their conditions. They discussed the challenges of implementing a digital library app, considering how to display book information to users in a clear and user-friendly way.
+
+Inventory Management and Java Annotations
+The discussion focused on two approaches to managing inventory in applications: a simple model using product names and a more complex model using product IDs. GeeksforGeeks explained that for platforms like Amazon and Flipkart, the complex model is used internally to track individual products, while a simpler model is suitable for user-facing interfaces. The team then explored the importance of getters and setters in Java classes, demonstrating how these methods enable data transfer between JSON and Java objects. Finally, GeeksforGeeks introduced Project Lombok, a library that simplifies the creation of getters and setters through annotations, and explained how these annotations are processed by the compiler to generate the necessary code.
+
+Lombok: Simplifying Java Code
+The instructor discussed Lombok, a library that reduces boilerplate code by generating getters, setters, and constructors. They explained the use of annotations like @Getter, @Setter, @AllArgsConstructor, and @Builder, demonstrating how these can make code cleaner and more efficient. The instructor also covered the Builder pattern in detail, showing how it allows for flexible object creation without specifying all fields. They addressed questions about using Lombok in microservices and the relationship between different constructor annotations. The session concluded with a brief overview of upcoming topics, including JPA and Hibernate.
