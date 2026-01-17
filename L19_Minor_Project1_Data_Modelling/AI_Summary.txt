@@ -1,0 +1,54 @@
+Quick recap
+The team discussed the design of a digital library system, focusing on identifying key entities and their relationships between Books, Authors, Students, and Transactions. They explored database normalization approaches and discussed potential APIs for the system, including search functionality and user role management. The team also covered implementation details like transaction constraints, fine policies, and primary key strategies, while successfully creating the database schema using Hibernate and agreeing to continue development in the next session.
+
+
+Next steps
+- GeeksforGeeks: Push the current project code to GitHub and share the Lucidchart link after the class.
+- All participants: Review the shared GitHub code and Lucidchart link for reference.
+- All participants: (Optional/encouraged) Try to implement any minor APIs not covered in the next session by themselves.
+- GeeksforGeeks: Continue with writing APIs and functionalities for the minor project in the next session.
+- GeeksforGeeks: Cover unit testing, along with any remaining minor APIs, in the next or following session as needed.
+
+
+Summary
+
+Digital Library System Design
+The team discussed the design of a digital library system, focusing on identifying key entities and their relationships. They identified four main entities: Book, Author, Student, and Transaction, with relationships established between them. The team agreed on a many-to-many relationship between Books and Authors, a many-to-one relationship between Books and Students, and one-to-many relationships between Students and Transactions, and Books and Transactions. They also discussed potential APIs for the system, including search functionality for books and the ability to add new books to the library.
+
+
+Digital Library Access Control Design
+The team discussed the design of a digital library system, focusing on user roles and API access. They defined relationships between entities, with one admin able to add multiple books but only one book per admin, while students can issue and return books but not modify book details. The APIs were mapped to user roles, with admin-only functions including adding books and updating student details, while students can perform transactions and view their own transaction history. The team also discussed database normalization, noting that authors would be managed implicitly when adding new books rather than through separate APIs.
+
+
+Database Normalization for Author System
+The discussion focused on database normalization, specifically addressing redundancy in a book author system. GeeksforGeeks explained how to reduce redundancy by separating author details into a separate author table with a foreign key relationship to the book table, demonstrating how this approach saves space and improves data organization. Gaurav asked about creating a user table, to which GeeksforGeeks clarified that while a user table could be created for roles like admin and student, authors are not considered users in this system, and author details are only included to enable book search functionality by author ID.
+
+
+Digital Library System Implementation
+The meeting focused on discussing the implementation of a digital library system, including constraints like a maximum of three books per student and a 15-day due date for returns. A fine policy was outlined, with a dummy logic example provided for testing purposes. The discussion addressed race conditions, explaining that SQL databases handle them automatically due to transactional operations, and no additional code handling is needed for this use case. The team reviewed project dependencies, including JPA, Web, MySQL driver, GP, and validation, and discussed the structure of models like Book, which will include attributes such as ID, title, and genre.
+
+
+UUID vs Integer Primary Keys
+The discussion focused on the advantages and disadvantages of using UUIDs versus auto-incremented integers as primary keys in databases. GeeksforGeeks explained that while UUIDs provide better security and are suitable for NoSQL databases, integers are faster for sorting and indexing due to their smaller size. The group discussed how companies like Sodexo use a hybrid approach, storing internal IDs as integers while presenting users with formatted UUID-like strings to hide system metrics. They agreed to implement a similar strategy for transaction IDs in their project, using UUIDs for user-facing IDs while maintaining integer primary keys for efficiency.
+
+
+Library Database Design Discussion
+The team discussed the design of a library management system database, focusing on the Book, Student, and Admin entities and their relationships. They decided to use unidirectional relationships for simplicity, with foreign keys in the Book table linking to Admin, Author, and Student entities. The team also covered JPA annotations, including @Enumerated for enum types and @CreatedBy and @UpdatedBy for timestamps. They briefly touched on the concept of bi-directional relationships but decided to focus on unidirectional relationships for this project.
+
+
+Foreign Key Design and Performance
+GeeksforGeeks explained the concept of foreign key relationships, particularly focusing on one-to-many and many-to-one associations. They discussed how foreign keys should be designed to allow for efficient querying and filtering of data, emphasizing the importance of indexed foreign keys for performance. The discussion also touched on the potential issues with using transaction lists as foreign keys, including the challenge of managing duplicate entries and the ability to efficiently query data across related tables.
+
+
+Database Design and Query Optimization
+The discussion focused on database design and query optimization, particularly regarding foreign keys and indexing. GeeksforGeeks explained that foreign keys should not be used for multi-value columns and demonstrated this through examples of querying book transactions. The conversation concluded with a review of Hibernate annotations for mapping relationships between tables, including the importance of the entity annotation for table creation and the choice between UUID and ID as primary keys.
+
+
+Database Schema Design Decisions
+The team discussed database schema design, focusing on tables for authors, admins, students, and transactions. They agreed on making email addresses unique across the database and decided to store transaction status as an enum with values pending, failed, and success. The team also added a due date column for transactions and discussed the need for an external transaction ID, which will be a UUID generated when a transaction is created.
+
+
+Hibernate Database Schema Development
+The team discussed data modeling and database schema creation using Hibernate. They identified and resolved issues with foreign keys and primary keys, particularly regarding the external transaction ID and address fields. The team successfully created six tables: Book, Student, Address, Admin, Author, and Transaction, with appropriate foreign key constraints. They agreed to continue working on the minor project the next day, focusing on writing APIs and functionalities, with the option to discuss any incomplete APIs or unit testing in the next Saturday session. The instructor also shared GitHub and Lucidchart resources for further reference.
+
+Lucidchart Link - https://lucid.app/lucidchart/e60fb3d0-95dd-4b15-9653-0c1ffc00befd/edit?viewport_loc=-107%2C-225%2C2447%2C1242%2C0_0&invitationId=inv_a87d7d11-5715-4ffa-8392-6b45f200fa9f
