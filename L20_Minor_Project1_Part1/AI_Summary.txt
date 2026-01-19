@@ -1,0 +1,51 @@
+Quick recap
+The meeting focused on building APIs for a digital library project, including data modeling, validation, and transaction management. The instructor demonstrated how to create REST controllers, services, and repositories for students, admins, books, and transactions. They explained the use of Spring Boot Starter Validation for input validation and showed examples of JPQL and native SQL queries. The instructor also covered how to handle relationships between entities, such as linking students to addresses and books to authors. They discussed the advantages and disadvantages of JPQL versus native SQL queries, including performance considerations. The session concluded with a brief overview of how Hibernate generates queries based on function names in repository interfaces, with plans to cover this topic in more detail in the next class.
+
+
+Next steps
+- GeeksforGeeks: Push the current project code to GitHub for team access and review.
+- All team members: Clone the GitHub repository in the coming week to review and work on the code.
+- GeeksforGeeks: In the next class, cover the completion of the two transaction APIs (issue and return), demonstrate advanced query function naming conventions in repository layer, and continue with unit testing and project completion.
+- All team members: (implied) Review the code and be prepared to complete the transaction APIs and related tasks in the next session.
+
+
+Summary
+
+Building RESTful APIs with Spring Boot
+The meeting focused on building APIs after completing data modeling. GeeksforGeeks demonstrated creating a REST controller class for students, including validation using Spring Boot Starter Validation and Jakarta Validation API. They showed how to create a Data Transfer Object (DTO) for student creation and explained the process of converting the DTO to a model class. The discussion also covered how to handle address data and the relationship between student and address tables in the database. An open question was raised about the order of creating student and address records, which GeeksforGeeks asked the audience to consider.
+
+
+Spring Boot Database Validation Demo
+The team discussed database operations and validation in a Spring Boot application. They explored the sequence of creating addresses and students in the database, determining that it's more efficient to add addresses first before updating the student table in two database calls rather than three. Anuradha demonstrated the use of Spring Boot Starter Validation framework, showing how to implement and test field validations for student data including age, email, and role number constraints. The team observed that validation annotations must include @Valid from jakarta.validation to work correctly, and they saw how the framework provides detailed error messages for multiple validation failures.
+
+
+Spring Boot Data Validation Challenges
+The discussion focused on data type validation in Spring Boot applications, particularly how message converters handle JSON to Java object mapping. GeeksforGeeks explained that message converters automatically validate data types, such as converting number strings to integers, but fail when invalid conversions occur. They also discussed database persistence issues, explaining that foreign keys can be null, but attempting to save unsaved transient objects (like an address without an ID) leads to Hibernate errors. The group explored solutions, including setting address to null, which allows successful database insertion without foreign key constraints.
+
+
+Database Constraints and Data Management
+The team discussed database constraints and foreign key relationships, focusing on how to handle address data in a student table. They identified that while a foreign key column can be null, it must reference an existing primary key in the parent table. The group decided to use a two-step approach to save data, creating the address first and then linking it to the student, rather than making three separate database calls. They also discussed the importance of maintaining clean service layer boundaries, recommending separate service classes for address and student operations to avoid unnecessary dependencies.
+
+
+Book API Data Validation Requirements
+The team discussed the implementation of a book creation API, focusing on data validation and entity relationships. They decided that an admin must exist before a book can be created, while authors can be created dynamically during book creation. The API will require mandatory fields including title, genre, and author email, with optional author name. They also discussed implementing a custom repository method to find authors by email address, though the exact implementation details were left for later explanation.
+
+
+Author Management System Implementation
+The team discussed the implementation of an author management system, focusing on a function that either adds a new author or retrieves an existing one based on email. They clarified that authors are created when adding a book, with the system checking for duplicate emails to prevent violations. The process involves checking if the author exists, creating a new author if not, and then associating the author with the book. They also discussed the need for an admin to be present before adding a book, with the admin and author IDs being set during the book creation process.
+
+
+Admin and Book Creation Implementation
+The team discussed the implementation of admin and book creation functionalities in their system. They clarified that admin ID is mandatory for adding books to the database, though it could be made optional if needed. GeeksforGeeks explained the process of creating an admin and adding books, including the handling of authors and foreign keys. They encountered an issue with persisting transient objects and decided to debug the code to resolve it. The team also discussed using Postman for API testing, though some members needed to install it first.
+
+
+Book Author ID Debugging Fix
+GeeksforGeeks explained a debugging session where they identified an issue with saving a book object that had an author with a null ID. They demonstrated how to fix the problem by properly setting and saving the author ID after retrieving the author from the database. The discussion concluded with plans to create a transaction controller and service for handling book transactions, with the option to implement either a single API with if-else checks or separate APIs for issuance and return.
+
+
+Book Transaction System Implementation
+The team discussed the implementation of a transaction system for book issuance and returns. They defined the necessary parameters including student ID, book ID, transaction type, and status, with the system automatically generating status and due rates. The team outlined validation criteria including checking book availability and ensuring students do not exceed their book issuance threshold of three books. They also discussed the need for admin approval and making books unavailable once a transaction is completed. The discussion concluded with plans to implement find-by-ID functions for both books and students, and to create a query to track the number of books issued to each student.
+
+
+JPQL vs Native Queries in Spring
+The meeting focused on explaining the differences between JPQL and Native Queries in Spring Data JPA. The instructor explained that JPQL queries work with Java objects and are parsed before application startup, while Native Queries work directly with SQL tables and are executed at runtime. They discussed the advantages and disadvantages of each approach, noting that JPQL provides better error checking but Native Queries can be slightly faster. The instructor also covered how to write custom queries and demonstrated a feature where function names can automatically generate queries without needing the @Query annotation. The session concluded with plans to complete a minor project in the next class, including implementing transaction APIs and discussing query writing nuances.
