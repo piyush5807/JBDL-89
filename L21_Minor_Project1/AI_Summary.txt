@@ -1,0 +1,41 @@
+Quick recap
+The meeting focused on developing a Digital Library project, with extensive discussion on implementing transaction management and handling database operations through Hibernate and JPQL queries. The team explored various aspects of transaction handling, including primary key generation, exception management, and fine calculation for book returns, while also addressing specific issues with book assignment and student limits. The session concluded with a demonstration of implementing a book transaction system and discussion of optimization strategies, along with an announcement about upcoming unit testing coverage in the next class session.
+
+
+Next steps
+- All team members: Write GET, PUT, PATCH, and DELETE APIs for student and book entities as practice, as suggested by instructor.
+- All team members: Try implementing the scalable GET API for books with filtering by author email, title, and genre, and attempt to handle combinations of filters as an exercise.
+- All team members: Test the return transaction functionality with various scenarios, especially fine calculation, as demonstrated.
+- All team members: Review and implement unit testing for transaction service functions in preparation for next Saturday's class.
+- Instructor: Push the current code to GitHub after the class.
+- All team members: Consider adding admin approval flow to the transaction process as an optional feature enhancement.
+- All team members: Cover unit testing of transaction service functions in next week's Saturday class (as per instructor's plan).
+
+Summary
+
+Digital Library Transaction Implementation
+The meeting focused on the development of a Digital Library project, specifically discussing the implementation of an issue transaction function. GeeksforGeeks explained the process of validating requests, creating transactions in a pending state, and updating book availability. They demonstrated how to handle exceptions and troubleshoot issues with JPQL and native queries. The team identified a problem with updating the book's student ID and discussed potential solutions. They planned to continue working on the return transaction function and test the API in a single go.
+
+
+Hibernate Query Execution Best Practices
+The discussion focused on understanding Hibernate's behavior with different types of database queries and the importance of annotations for managing transactions. GeeksforGeeks explained that Hibernate should use statement.execute() or statement.executeUpdate() instead of statement.executeQuery() for update, delete, and insert operations, and emphasized the need for the @Modifying and @Transactional annotations to ensure correct query execution. Theja and GeeksforGeeks discussed the transactionRequiredException and how it arises from unsafe operations that could lead to data inconsistency, particularly when multiple requests modify the same data concurrently. They also clarified that while @Transactional is necessary for unsafe operations, it is not required for read-only operations like selects.
+
+
+Database Exception Handling Strategies
+The discussion focused on understanding and resolving exceptions related to database operations, particularly when updating and assigning books to students. Gaurav explained the differences between native queries and Hibernate operations, highlighting how exceptions arise from both the database and Hibernate layers. He demonstrated the use of transactional and modifying annotations to ensure data consistency and showed how the save function in Spring Data JPA handles both insert and update operations. The conversation concluded with a discussion on optimizing update functions by potentially using a generic update method or leveraging Spring Data JPA's save function for more efficient data management.
+
+
+Hibernate Primary Key Persistence Strategies
+The discussion focused on primary key generation strategies and transaction management in a system. GeeksforGeeks explained how Hibernate handles entity persistence and updating based on the presence of primary keys, demonstrating through debugging that new entities are persisted while existing entities are merged. They showed that the same save function can be used for both creation and updates, eliminating the need for separate update functions. The conversation concluded with a discussion about error handling, specifically whether failed transactions should remain in a pending state or be moved to a different status when exceptions occur.
+
+
+Transaction Management and Error Handling
+The team discussed transaction management, focusing on handling failed payments and improving user experience. They agreed that transactions should always reach a terminal state of success or failure, and implemented a mechanism to save failed transaction statuses in the repository. They also reviewed a validation system that throws an error when a student reaches their maximum book issue limit, and identified a bug in the due date calculation which was subsequently fixed. The discussion concluded with planning the next steps for implementing a return transaction functionality, which will include validating book and student IDs, checking fines based on due dates, and handling additional return-related scenarios.
+
+
+Book Return System Implementation Plan
+The team discussed implementing a book return transaction system with validation and fine calculation. They agreed on a four-step process: validate the transaction, calculate the fine, create a pending transaction, and unassign the book. Gaurav and GeeksforGeeks worked through the code implementation, including handling warnings about integer comparisons and calculating fines based on the difference between current and due dates. They decided to store fines in paisa format to avoid decimal inconsistencies. The team also discussed how to retrieve the original issue transaction for the return, agreeing on a query that would match the student ID, book ID, and transaction type.
+
+
+Book Transaction System Implementation
+The instructor demonstrated how to implement a book transaction system, focusing on handling issue and return transactions with proper data validation and fine calculation. They showed how to optimize the code by extracting common repository operations into a finally block and discussed the implementation of a GET API for books with filtering capabilities. The instructor highlighted the challenges of scaling the current function-based approach and suggested alternative query-based solutions for more complex database systems. They announced that unit testing for this minor project would be covered in the next week's Saturday class, as the following day's class would be canceled due to personal reasons.
