@@ -1,0 +1,50 @@
+Quick recap
+The instructor conducted a detailed session on unit testing, focusing on writing test cases for the digital library project's transaction service. They explained the importance of unit testing in identifying logical bugs and ensuring code correctness, while also discussing code coverage metrics. The instructor demonstrated how to write test cases using JUnit and Mockito, covering both happy and failure scenarios, and emphasized the importance of mocking dependencies and verifying method calls. They also showed how to handle exceptions and set up test environments, while explaining the difference between inject mocks and mock annotations. The session concluded with a discussion on code coverage and the significance of writing effective test cases to ensure code integrity and prevent future modifications from breaking existing functionality.
+
+
+Next steps
+- All students: Write unit test cases for the return transaction function and other service classes as applicable, following the patterns demonstrated in class.
+- All students: Add additional test cases to cover scenarios such as when the student has issued more books than the threshold, and other untested code paths in the issue transaction function to increase coverage.
+- GeeksforGeeks: Push the code for unit test cases to GitHub for students to clone and reference.
+- All students: Start work on caching with Redis, as announced for the next class session.
+
+
+Summary
+Unit Testing with JUnit and Mockito
+GeeksforGeeks explained the importance of unit testing in understanding code logic and achieving code coverage, which is a measure of how much of the code is tested. They demonstrated how to write unit test cases using JUnit and Mockito for a digital library project, focusing on testing the issueTransaction function in the transaction service class. The instructor emphasized the importance of mocking responses and creating test cases for various scenarios to ensure comprehensive testing of the code.
+
+
+Mockito Annotations: Mock vs Inject Mock
+GeeksforGeeks explained the differences between mock and inject mock annotations in Mockito, demonstrating how they create actual and dummy objects respectively. He showed that inject mock creates a real object with non-null dependencies, while mock creates a dummy object with null dependencies. GeeksforGeeks also explained when to use each annotation, recommending inject mock for functions intended to be called and mock for other cases. He concluded by discussing how to handle exceptions and showed a simple transaction service test case.
+
+
+Mocking Dependencies in Transaction Service
+The team discussed unit testing practices, focusing on mocking dependencies in a transaction service test case. They clarified that while book service and student service were needed for the test, book repository and author service were not required since the transaction service did not directly depend on them. The discussion concluded with a demonstration of how to use Mockito to mock the book service's findById method, showing how to stub dummy data to be returned when specific IDs are passed.
+
+
+Mockito Test Case Writing Demonstration
+GeeksforGeeks demonstrated how to write test cases using Mockito, focusing on both positive and negative scenarios. They showed how to set up mock objects for books and students, and explained the importance of proper test case setup to ensure accurate testing. The discussion also covered code coverage metrics, emphasizing that while coverage numbers may increase, the actual functionality being tested is what matters most.
+
+
+Java Exception Handling Test Cases
+The discussion focused on writing test cases for failure scenarios in Java code. Anuradha explained how to handle exceptions in test annotations by using the "expected" field to anticipate specific exception types. They demonstrated creating custom exception classes that inherit from existing exceptions, such as "BookNotFoundException" extending "IllegalArgumentException." The team reviewed how to implement these exceptions in the code and run test cases to ensure proper handling of error scenarios like missing books or books already assigned to other students.
+
+
+Exception Handling and Mockito Testing
+GeeksforGeeks explained how to create specific exception classes for different error scenarios in a codebase, such as book not found and student not found exceptions. They demonstrated testing these exceptions using Mockito, showing how to set up mock data to trigger the exceptions and ensuring that test cases catch the expected exceptions. GeeksforGeeks also addressed an unnecessary Mockito warning by removing or commenting out unused stubbing, and clarified that when running a class-level test, all methods execute in sequence.
+
+
+Debugging and Testing Strategies
+GeeksforGeeks discussed debugging and testing scenarios for a codebase involving student and book services. They addressed issues with null values and exceptions, implementing stubbing techniques to handle edge cases. The team also explored the use of static imports to simplify Mockito-related code and improve readability. Finally, they outlined steps to test a happy flow for issuing transactions, emphasizing the importance of testing various scenarios to ensure the functionality of the system.
+
+
+Transaction Service Unit Testing Challenges
+The discussion focused on resolving issues with unit testing a transaction service, particularly regarding the handling of null values and private variables. GeeksforGeeks explained how to mock methods and handle void functions in test cases, emphasizing the importance of not calling real methods when mocking. They also addressed how to set values for private fields using setter methods and discussed the limitations of testing certain functionalities within a specific class. Anuradha asked about error handling for invalid input, to which GeeksforGeeks clarified that since the functions are mocked, no errors are thrown, and separate test cases would be needed to validate such scenarios.
+
+
+Database Testing and Code Coverage
+The discussion focused on database operations in unit tests, where it was explained that actual database operations should not be performed, but rather mock data should be used for logic testing. The team discussed a specific issue with transaction IDs in test cases, where the external transaction ID was found to be mandatory in the payload, and proper test cases were demonstrated to ensure code correctness and database integrity. The code coverage for the issue transaction function was analyzed, showing 41% coverage, with suggestions to improve it to around 50% by adding additional test cases for edge cases and exception handling.
+
+
+Mockito Unit Testing Techniques
+The instructor explained the importance of unit testing, focusing on mocking and verification techniques using Mockito. They demonstrated how to write test cases for void methods and emphasized that while mocking is necessary, verification is crucial for ensuring code integrity and preventing future developers from unintentionally breaking the code. The instructor highlighted that good test cases should fail when changes are made to the expected number of calls, ensuring the code works as intended. They also mentioned that while increasing code coverage is important, writing test cases for core business logic is more critical than for controllers, DTOs, or models. The session concluded with plans to cover Redis caching and Spring Security in the next sessions.
