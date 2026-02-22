@@ -1,0 +1,37 @@
+Quick recap
+
+The meeting focused on enhancing the security of a digital library project by implementing Spring Security and caching. GeeksforGeeks demonstrated how to add user authentication, restrict API access based on user roles, and remove vulnerabilities in the system. The discussion covered creating user and admin accounts, securing transaction APIs, and implementing caching to improve performance. GeeksforGeeks also addressed how to retrieve user details from the authentication context without taking sensitive information from client requests. The session concluded with an announcement about changing the meeting time to 5-7 PM due to scheduling conflicts, and a preview of the upcoming topics, including OAuth2 and Kafka.
+
+
+Next steps
+- All participants: Implement caching for student details retrieval (first check cache, then database) as described, and reach out if issues arise.
+- All participants: Practice adding caching to other relevant endpoints as per the caching lecture, and ask for help in the next session if needed.
+- GeeksforGeeks: Push the updated code to the repository for group reference.
+- Course coordinator: Send email to all participants confirming the timing change for tomorrow's session to 5-7 PM.
+- All participants: Join tomorrow's session at the updated time (5-7 PM) for the next topic (OAuth2/SSO).
+- All participants: Join next Saturday's session at 7-9:30 PM for the Kafka topic.
+
+Summary
+
+Spring Security Implementation for Digital Library
+The instructor discussed the implementation of Minor Project 2, which involves adding Spring Security and caching to the existing digital library system. They explained the need to create user roles with database authentication and outlined the architecture for creating users and linking them to student/admin tables. The instructor also described how to fetch student details using user ID and emphasized the importance of securing APIs by removing direct ID references from requests.
+
+
+User Table Foreign Key Design
+The team discussed two approaches for user and student/admin table relationships: storing foreign keys in the user table or maintaining separate tables. They decided to store both student ID and admin ID as foreign keys in the user table, noting that while this approach could be complex, it would avoid unnecessary database calls and reduce storage waste. The discussion then moved to implementing a student signup API, including the creation of DTOs, services, and repository classes, with a focus on password encryption and the three-step process of creating a user, creating a student, and attaching the student to the user.
+
+
+User Creation and Authentication Setup
+The discussion focused on implementing user and student creation functionality, including the creation of addresses during user setup. The team reviewed authentication mechanisms, defining unique username requirements and implementing Spring Security filters for different API endpoints. A critical issue was identified where the application was throwing exceptions due to missing auto-wiring of repositories, which needed to be addressed in the user service and app config classes.
+
+
+Spring Authentication and Dependency Resolution
+The discussion focused on resolving a circular dependency issue in a Spring application, where the password encoder and user service were creating a deadlock. The solution involved creating a new EncoderConfig class to break the dependency cycle, though this didn't fully resolve the problem. The team then worked on implementing user authentication, successfully creating students and users with associated foreign keys, though they noted some issues with SQL query logging and an unnecessary address table insertion. They also demonstrated that while students could access the GetBooks API, they couldn't create books, which led to a discussion about whether to allow any admin to create their account in a library system.
+
+
+Admin Sign-Up Feature Implementation
+The team discussed implementing an admin sign-up feature with restrictions, deciding to create a default admin user during application startup who can add other users. They refactored the code to use a base SignupRequestDTO class with common fields (username, password, name, email) and two child classes for admin and student sign-up requests. Bharath suggested using a switch case to handle different types of sign-up requests in the service layer, and they agreed to create a single function that can handle both admin and student sign-up requests by typecasting. The team also discussed handling potential duplicate key exceptions when creating the initial admin user.
+
+
+Securing APIs with Spring Security
+The instructor demonstrated how to secure APIs by removing vulnerable input parameters and using Spring Security to retrieve user information from the authentication context. They showed how to implement secure APIs for students and admins, and explained how to handle transactions without exposing user IDs. The instructor also announced a change in session timing to 5-7 PM for the next class, and mentioned that caching would be covered as a separate topic. The session concluded with a brief overview of upcoming topics, including OAuth2 and Kafka.
