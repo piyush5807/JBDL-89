@@ -1,0 +1,54 @@
+Quick recap
+
+The meeting focused on designing an e-wallet system using microservice architecture. GeeksforGeeks explained the differences between monolith and microservice architectures, highlighting advantages like easier scaling and reduced downtime in microservices. The team discussed implementing multiple independent services including user service, wallet service, transaction service, and notification service, all running on localhost but on different ports. They explored using Kafka for asynchronous communication between services, particularly for publishing user creation events to wallet services. The discussion covered database configuration, Spring Security implementation for user authentication, and the challenges of service-to-service communication. The team also addressed how to handle exceptions and implement rollback mechanisms in the microservice architecture. The session concluded with plans to continue the project implementation in the next two classes scheduled for the following weekend.
+
+
+Next steps
+- GeeksforGeeks: Push today's code and last week's AI summary to GitHub for reference
+- GeeksforGeeks: Implement Kafka config and complete Kafka integration in user service for publishing user creation events (planned for next class)
+- GeeksforGeeks: Cover transactional annotation scenarios and synchronous communication flow in the next class
+- All participants: Review the shared user service chart diagram before the next class
+- All participants: Bring any remaining questions or doubts about the project to the next class
+- GeeksforGeeks: Complete the major project and wrap up the course in the next two classes (Saturday and Sunday)
+
+
+Summary
+
+Microservices vs Monolith Architecture
+The instructor discussed the differences between monolith and microservice architectures, explaining that microservices involve independent services communicating through APIs or Kafka events, which can be scaled and updated independently without affecting the entire system. They highlighted that microservices allow for easier scaling, better fault tolerance (as downtime in one service doesn't affect others), and the ability to use different databases based on service needs, while also noting that microservices can be more complex to manage and may require more resources than monolithic architectures.
+
+
+Microservices vs Monolithic Architecture
+The discussion focused on the trade-offs between monolithic and microservice architectures, with GeeksforGeeks explaining how microservices can increase response times due to network calls between services, while Theja mentioned banking applications as examples where monolithic architecture is still preferred for speed. The group then discussed building an e-wallet application using microservices, with GeeksforGeeks outlining assumptions including single-user wallets and wallet-to-wallet transfers, with all services running on localhost using different ports to simulate a distributed environment.
+
+
+Microservices Architecture and Setup
+The team discussed the architecture of a microservices-based system, including user, wallet, and transaction services. They agreed on the need for a notification service and an authorization service. GeeksforGeeks demonstrated setting up a new project in IntelliJ using Maven and various dependencies, including Spring Boot, Kafka, and Spring Security. They discussed two approaches to organizing the code: using separate repositories for each service or using a monorepo structure with different modules.
+
+
+Microservices Deployment with AWS Lambda
+The discussion focused on building and deploying microservices using AWS Lambda and serverless functions, with each service having its own serverless.yml file and configuration. The team explained how to add Maven modules to a project, with each module having its own pom.xml file and being able to communicate with other services running on different ports (8080, 4000, and 6000 in this example) when running locally. They clarified that while service registry and API gateway are needed for cloud deployment, these are not required for local development, and communication between services can be handled through direct API calls or Kafka events.
+
+
+Port Allocation and Maven Dependencies
+The discussion focused on two main topics: port allocation for applications and Maven dependency management. GeeksforGeeks explained how to select available ports for running applications, demonstrating the process of changing from port 4000 to 5001 due to conflicts. The conversation then shifted to Maven dependencies, where GeeksforGeeks illustrated how a parent project can inherit and share dependencies with child modules, showing that even though the wallet service's pom.xml file doesn't explicitly define Spring Security, it can still access it through the parent project's dependencies.
+
+
+Database Configuration for Service Scalability
+GeeksforGeeks explained the importance of configuring different databases for different services to prevent a single point of failure and distribute the load. They discussed how running multiple databases on the same server can lead to performance issues, and recommended hosting databases on separate servers to improve scalability and reliability. Anuradha asked about sharing the same database between different services, to which GeeksforGeeks clarified that while the host remains the same, different databases can be used to avoid bottlenecks.
+
+
+Microservices Architecture and Communication
+GeeksforGeeks explained the concept of microservices and demonstrated how different services can run independently using different ports and processes. They discussed the importance of separating database servers to prevent high connection loads and introduced the idea of using Kafka for event-driven communication between services. Theja asked about the problem with the API creation process, and GeeksforGeeks elaborated on the benefits of using events instead of direct API calls to avoid service dependencies and improve scalability. GeeksforGeeks also outlined plans to create a user service with Spring Security integration and discussed potential user validation requirements.
+
+
+User Authentication and Service Integration
+The team discussed implementing user details and security features, with GeeksforGeeks explaining the need to create a user repository and implement user detail service methods. They explored two approaches for handling user authentication across services: making API calls from transaction service to user service, which would result in poor user experience due to additional network latency, or finding a way to share user tokens between services to reduce latency. GeeksforGeeks mentioned they would continue working on completing the user creation flow and finding an optimal approach to handle user authentication across services.
+
+
+User Services and Kafka Implementation
+GeeksforGeeks explained the configuration and implementation of user services, including authentication, authorization, and password encoding. They discussed the creation of a Kafka event for user creation and the need for a Kafka configuration. Theja asked about rollback mechanisms in a pub-sub model, and GeeksforGeeks explained that they had not yet reached the transaction point but would implement a mechanism for updating wallets during transactions. The class was canceled for the following day, and the next two sessions were scheduled for Saturday and Sunday to complete the major project.
+
+
+Kafka Architecture for Wallet Services
+The discussion focused on a Kafka-based architecture for wallet and transaction services, where a wallet update consumer needs to be idempotent to prevent duplicate transactions and monetary losses. The team discussed error handling scenarios, including how to handle failed user creation and wallet publication, with options to retry or use a dead letter queue for failed messages. They agreed to cover synchronous communication in a future class, and the instructor planned to push the code and AI summary to GitHub, with the project expected to be completed over the next two classes.

@@ -1,0 +1,41 @@
+Quick recap
+The instructor continued the Kafka training session by explaining key concepts including partitioning, replication, and leader-follower architecture. They demonstrated how to use keys for controlling message distribution across partitions and showed a practical example of running multiple Kafka nodes on a single machine to illustrate replication and load balancing. The instructor covered how Kafka manages data redundancy through replication factors and explained the difference between replicas and in-sync replicas (ISR). They also discussed the leader election process and how followers periodically pull data from leaders. The session concluded with a demonstration of creating and consuming messages from a replicated topic, showing how messages are stored across different nodes in a cluster.
+
+
+Next steps
+- GeeksforGeeks: Share the document link in the chat and on the group (already done during meeting, but explicitly mentioned as a follow-up action).
+- GeeksforGeeks: Start the major project in the next class (stated intention to start next week).
+
+
+Summary
+
+Kafka Partition Key Assignment
+The instructor continued the Kafka tutorial by explaining how to publish records to specific partitions using keys, demonstrating the process with a console producer and three consumer groups. They showed how keys determine partition assignment through a hash function, allowing messages with the same key to be directed to the same partition. The instructor also discussed replication and the leader-follower architecture in multi-node Kafka environments, noting that these concepts would be covered in the next session.
+
+
+Kafka Partitioning and Message Distribution
+GeeksforGeeks explained Kafka's partitioning algorithm, which uses a sticky algorithm to improve efficiency by sending batches of messages to partitions rather than individual messages. He demonstrated how the key-value separator is necessary for the console producer to understand the message structure, though the consumer only sees the value. Aditya asked about the behavior when keys are not specified, and GeeksforGeeks clarified that Kafka's default partitioner distributes messages in a round-robin fashion within batches to optimize performance.
+
+
+Kafka Cluster Architecture Overview
+GeeksforGeeks explained the architecture of a Kafka cluster, highlighting the role of producers, consumers, and brokers. They discussed the importance of adding multiple nodes for reliability, introducing the concept of data replication across nodes to prevent data loss. The replication factor was introduced as a measure of data redundancy, with higher factors providing greater reliability but at a higher cost.
+
+
+Kafka Leader-Follower Architecture Overview
+The discussion focused on Kafka's leader-follower architecture and replication strategy. GeeksforGeeks explained how Kafka manages data across multiple nodes, with one node acting as the leader for writes and reads, while other nodes serve as followers for backup purposes. They demonstrated how to set up multiple Kafka brokers on a single machine using different ports and configuration files, emphasizing that this is not recommended for production but useful for demonstration purposes. The explanation included details about broker IDs, ports, and the importance of maintaining unique identifiers for each broker in the cluster.
+
+
+Kafka Broker Setup Demonstration
+The speaker demonstrated setting up multiple Kafka brokers and creating a new topic with specific partitions and replication factors. They encountered some port conflicts and had to adjust the broker IDs and ports to resolve issues. The setup was successful, with three nodes running and each acting as a leader for different partitions of the new topic.
+
+
+Kafka Partitioning and Replication Overview
+The discussion focused on Kafka's partitioning and replication mechanisms. GeeksforGeeks explained that Kafka automatically assigns leaders for partitions based on the specified replication factor and partition count, aiming for balanced node loads. They clarified that while partitioning improves performance by allowing more consumers and balancing load, replication ensures data durability and backup. The conversation also covered how followers pull data from leaders, the concept of in-sync replicas (ISR), and leader election processes in case of leader failure, with Zookeeper handling elections by prioritizing in-sync replicas when available.
+
+
+Kafka Replication and Leader Management
+The discussion focused on understanding out-of-sync replicas in Kafka, explaining that it occurs when a follower cannot match the leader's speed due to factors like network latency or disk I/O issues, but not hardware failures. GeeksforGeeks demonstrated how to create and manage topics with different replication factors and partition counts, highlighting Kafka's ability to distribute partitions across nodes. They also showed how to verify leader nodes and consumer behavior using Kafka log directories, clarifying that production and consumption occur only on leader nodes.
+
+
+Kafka Server Configuration Overview
+The instructor explained Kafka server configurations, particularly regarding bootstrap server locations and cluster connections. They clarified that while it's possible to connect to a single node using IP addresses, in production environments one should use the DNS of the entire Kafka cluster, similar to how domain names route to multiple servers. The instructor also covered Zookeeper's role as a required service for Kafka servers, explaining that while producers and consumers don't interact with Zookeeper directly, it must be running for Kafka to operate properly. The class concluded with plans to cover the major project in the next two sessions, and the instructor shared the course document link with the students.

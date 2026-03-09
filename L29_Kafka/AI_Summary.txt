@@ -1,0 +1,47 @@
+Quick recap
+
+The meeting focused on explaining Apache Kafka, a real-time publish-subscribe messaging system, and its practical implementation. The instructor demonstrated how Kafka works as a middleware between producers and consumers, highlighting its advantages over traditional API calls and its use in companies like Uber, Netflix, and LinkedIn. Key concepts covered included Kafka's architecture, the role of Zookeeper for state management, partitioning for load balancing, and message retention policies. The instructor also explained how to install and configure Kafka locally, create topics, and use console producers and consumers. Throughout the session, participants asked questions about Kafka's differences from other messaging systems like RabbitMQ, and the instructor clarified that Kafka's durability and scalability features make it particularly suitable for high-throughput use cases.
+
+
+Next steps
+- GeeksforGeeks: Cover the topic of Replication in Kafka in the next session
+- GeeksforGeeks: Start brainstorming for the major project in the next session
+- GeeksforGeeks: Change the timing of tomorrow's class to 5pm and inform participants
+
+
+Summary
+
+Understanding Apache Kafka's PubSub Model
+The meeting focused on explaining Apache Kafka, a real-time publish-subscribe messaging system. GeeksforGeeks discussed the differences between traditional API calls and Kafka's PubSub model, highlighting how Kafka enables communication between multiple services without direct client-server connections. They explained Kafka's advantages, such as high throughput, distributed architecture, and durability, and contrasted it with other messaging systems like AWS SQS and RabbitMQ. The session also covered why Kafka is useful for complex integrations, addressing challenges like data format compatibility and server load, and concluded with an overview of how Kafka handles message storage and processing.
+
+
+Apache Kafka: Real-Time Data Processing
+The discussion focused on Apache Kafka, a distributed streaming platform used as a middleware between producers and consumers. GeeksforGeeks explained that Kafka enables asynchronous, non-blocking communication, unlike traditional synchronous API calls, and highlighted its advantages such as durability and fault tolerance. Real-life examples discussed included stock market data processing and YouTube's notification system. The session concluded with an overview of Kafka's use cases by major companies like LinkedIn, Uber, and Netflix, emphasizing its ability to handle near real-time data processing.
+
+
+Apache Kafka: Real-Time Data Processing
+The discussion focused on Apache Kafka, a distributed streaming platform used for real-time data processing. GeeksforGeeks explained that Kafka can be hosted on cloud platforms like AWS or managed through services like Confluent, and clarified that while it's not a Spring Boot server, it can be integrated with various programming frameworks. The conversation included an example of how Kafka might be used by companies like Uber to dynamically adjust pricing based on real-time data streams from booking services, with data being published to Kafka and processed by consumer services for pricing decisions.
+
+
+Kafka PubSub Model Overview
+The discussion focused on explaining the Kafka PubSub model and its components. GeeksforGeeks explained that Kafka acts as a messaging system where producers publish messages to topics (queues) and consumers subscribe to those topics to receive messages. They described how Kafka is used in various applications like Netflix for movie recommendations and Amazon for product recommendations. The conversation also covered the role of Zookeeper, which manages configuration and state information for Kafka, including tracking consumer offsets. Swathi asked about message retention and what happens if a consumer is down, to which GeeksforGeeks explained that messages are retained for 7 days by default and if a consumer restarts, it will start from the beginning of the queue, potentially leading to duplicate messages being processed.
+
+
+Kafka Installation and Configuration Guide
+GeeksforGeeks explained the installation and configuration of Kafka, highlighting the differences between versions 3.x and 4.x, and recommended using version 3.x for learning purposes due to its separate Kafka and Zookeeper setup. They demonstrated how to download and install Kafka from the Apache website, emphasizing the importance of the server.properties file for starting the Kafka server. However, GeeksforGeeks encountered an issue with the installation, leading to a discussion about potential errors and the need to use the correct binary file instead of the source code.
+
+
+Kafka and Zookeeper Configuration Setup
+The team discussed the setup and configuration of Kafka and Zookeeper servers. GeeksforGeeks explained how to resolve connection errors between Kafka and Zookeeper by adjusting the zookeeper connection timeout property in the config file. They clarified that in the latest version of Kafka 4.2, Zookeeper management is handled internally, reducing the likelihood of such issues. Swathi asked about the role of I/O threads in server.properties, and GeeksforGeeks explained they handle data storage and retrieval operations on disk. The team confirmed that both Kafka and Zookeeper servers were successfully running, with logs being generated in the specified directories.
+
+
+Kafka and Zookeeper Concepts Overview
+The discussion focused on Kafka and Zookeeper concepts, including broker IDs, topics, and message handling. GeeksforGeeks explained that Kafka uses a pull mechanism where consumers fetch messages from the server, and clarified that topics are logical groupings of related messages. The group discussed the importance of understanding Kafka commands through the help section of the terminal, as this provides clear documentation for various operations. The session concluded with a practical exercise to create topics, with GeeksforGeeks emphasizing the value of exploring Kafka's built-in help for learning and troubleshooting.
+
+
+Kafka Topic Partitioning Management
+The discussion focused on Kafka's topic management and consumer partitioning. GeeksforGeeks explained that while creating a topic without specifying partitions results in a single partition by default, Kafka allows altering topics to add more partitions as consumer requirements change. The key constraint was explained: within a consumer group, only one consumer can consume from a single partition to avoid data duplication and state management issues. The team discussed how producers must coordinate with consumers to ensure appropriate partition configurations based on production and consumption rates, with the ability to dynamically adjust partitions as consumer groups scale.
+
+
+Kafka Partitioning and Consumer Groups
+The meeting focused on explaining Kafka's partitioning and consumer group concepts. The instructor explained how Kafka partitions data across multiple servers for load balancing and fault tolerance, with a recommended ratio of one partition per consumer to optimize performance. They demonstrated how to modify partition counts and showed examples of consumer groups, explaining that consumers within the same group can read from different partitions while consumers in different groups cannot read the same messages. The instructor also covered Kafka's sticky partitioner implementation, which replaced the previous round-robin approach in version 2.4, and explained how producers can specify keys to control message distribution across partitions. The session concluded with a discussion about message deduplication and idempotency, where the instructor explained that consumers should maintain their own state to prevent duplicate message processing.

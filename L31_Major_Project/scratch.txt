@@ -1,0 +1,11 @@
+
+Requirements
+
+1. Whenever a user is created, we need to created their wallet and add promotional balance of Rs 10.
+Solution: User service publishes a kafka event and wallet service consumes that kafka event and create a wallet with some balance
+
+User Service    =>      Kafka       =>      Wallet Service
+(Publisher)                                 (Consumer)
+
+                                    =>      Notification Service
+                                            (Consumer)
