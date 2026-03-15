@@ -1,0 +1,55 @@
+Quick recap
+The meeting focused on developing a microservices architecture for a financial application, with emphasis on implementing Kafka for asynchronous communication between services. The team discussed creating user and wallet services, including the configuration of Kafka producers and consumers, and demonstrated how to publish and consume events. They implemented transaction services, covering validation checks, wallet updates, and status changes, while also addressing security concerns and testing the end-to-end flow. The session concluded with plans to integrate notification services in the next meeting and explore transactional annotations for service-level functions.
+
+Next steps
+- Team/Individual: Integrate Spring Security in the transaction service (to avoid 401 errors and ensure proper authentication/authorization), as noted for tomorrow's session
+- Team/Individual: Add failure reason field to the transaction schema to capture why a transaction failed
+- Team/Individual: Add logging at debug level to enable viewing of producer/consumer logs in transaction and wallet services
+- Team/Individual: Cover @Transactional annotation in tomorrow's session and apply to relevant functions (update wallet, create wallet, create transaction, update transaction)
+- Team/Individual: Integrate notification service to listen to "transaction completed" events and send emails to end users
+- Team/Individual: Configure mail sender for notification service before tomorrow's class
+- Team/Individual: Remove "sender ID" from transaction request payload and implement fetching it from token (as per TODO in code)
+- Team/Individual: Make currency in wallet entity configurable (currently hardcoded)
+- Team/Individual: Add handling for failure scenarios in wallet update (e.g., receiver wallet not present) and implement escrow account functionality if applicable
+- Team/Individual: Download and add the flow diagram to the documents in the GitHub repo
+- Team/Individual: Post the current code to the repository after the class
+- Team/Individual: Modify the code tomorrow as per planned changes
+
+
+Summary
+
+Kafka Producer Configuration Implementation
+GeeksforGeeks continued the project by discussing the implementation of Kafka producer configuration for the user service. The team reviewed the need to define a producer factory and configure properties such as the bootstrap server and key serializer. GeeksforGeeks explained the purpose of the key in Kafka, including its role in determining message partitioning, and introduced the use of a string serializer for key serialization. The discussion focused on setting up the producer configuration to enable the user service to act as a producer and publish events to Kafka.
+
+
+Kafka Serialization and Producer Configuration
+GeeksforGeeks explained the process of serializing and deserializing data in Kafka, emphasizing the importance of using string serialization to avoid platform-specific dependencies between producer and consumer services. They discussed the configuration of Kafka templates and producer factories, highlighting the need to convert JSON data to string format using an object mapper from the Jackson library. The discussion concluded with an overview of the send function in Kafka and how to properly format the data and topic for message production.
+
+
+Kafka Integration for User Services
+The team discussed implementing Kafka integration for user and wallet services. They verified that the Kafka dependency was configured correctly in form.xml and confirmed the Kafka server setup by starting Zookeeper and a single Kafka server. During testing, they identified that database tables weren't being created due to missing schema configuration, which was resolved by adding "ddl-auto=update" to the configuration. The team successfully tested the user service by creating a console consumer to verify message publication to Kafka topics. For the wallet service, they decided not to create a direct API for wallet creation, instead opting to have wallets automatically created through Kafka events when users are created. They outlined plans to implement a GET API for retrieving wallet details by ID and discussed the need for a wallet repository class extending GP repository.
+
+
+Wallet Service Design and Kafka Implementation
+The team discussed designing a wallet service, focusing on database fields and Kafka implementation. They identified key fields for the wallet table including user ID, balance, currency, creation and update timestamps. They planned to implement a Kafka consumer to listen for user creation events and automatically create wallets, using a JSON parser dependency to convert string messages into wallet objects. The discussion included details about handling JSON data extraction from incoming messages and populating wallet information.
+
+
+Wallet System Implementation Discussion
+The team discussed implementing a wallet system with promotional balance functionality. They decided to store monetary values in the lowest denomination possible (e.g., paisa for INR) to avoid decimal issues. The discussion covered creating a wallet entity with properties including name, user ID, balance, and currency. They also addressed the need to configure Kafka consumer settings, including bootstrap servers and deserializers for key and value data.
+
+
+Kafka-Driven User Wallet Integration
+GeeksforGeeks demonstrated a system where user and wallet services interact through Kafka messaging. They showed how creating a user triggers a Kafka event that the wallet service consumes to create a corresponding wallet. GeeksforGeeks identified a JSON parsing issue where user IDs were being treated as long instead of integer data types, which was resolved by changing the data type to long. They outlined plans to extend the system with a notification service that would send emails when wallets are created, and discussed the next phase involving transaction services between users.
+
+
+
+Transaction Service API Development
+The team discussed implementing a transaction service, focusing on creating a REST controller and defining the necessary API endpoints. They identified key parameters needed for transaction requests, including sender ID, receiver ID, amount, and an optional reason for the payment. The team also outlined the structure of the transaction model, including fields such as external transaction ID, transaction status, and transaction details. They agreed to start with an unsecured endpoint for testing purposes and to address Spring Security implementation later.
+
+
+Transaction System Implementation Discussion
+The team discussed implementing a transaction system that involves wallet updates and Kafka event publishing. They outlined the process for handling transaction initiation, including fetching sender and receiver wallets, applying validations, and updating wallet balances. If wallet updates are successful, a Kafka event with a "success" status is published to notify the transaction service to complete the transaction. If validations fail, a Kafka event with a "failed" status is published. The wallet service needs to be updated to include producer-related Kafka properties since it now acts as both a consumer and producer.
+
+
+Kafka-Based Wallet Transaction System
+The meeting focused on implementing a Kafka-based messaging system for wallet and transaction services. GeeksforGeeks demonstrated the end-to-end flow where a transaction service initiates a transaction, which triggers wallet updates through Kafka events. The system successfully handles both successful and failed transaction scenarios, with wallet balances being updated asynchronously within approximately one second. Key technical components discussed included the use of external transaction IDs to link wallet updates with specific transactions, and the implementation of producer and consumer configurations for Kafka. For next steps, the team planned to address Spring Security configuration in the transaction service, implement transactional annotations, and integrate a notification service for email alerts.
