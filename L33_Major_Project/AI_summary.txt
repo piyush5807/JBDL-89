@@ -1,0 +1,36 @@
+Quick recap
+
+This session focused on implementing Spring Security in a microservices architecture, specifically for a transaction service. The instructor demonstrated how to enable authentication and authorization in the transaction service by creating an abstract user class that extends the user service component, allowing the transaction service to make API calls to retrieve user details while maintaining security. The implementation involved using REST template to call the user service API and convert the response into the abstract user object. The session also covered the use of transactional annotations in Spring Boot, explaining when and why to use them for ensuring database consistency across multiple operations. The instructor provided guidance on transaction propagation types and isolation levels, and suggested a practical exercise to implement email notifications using Java Mail Sender for various events in the system.
+
+Next steps
+
+- Students/Participants: Implement email notification functionality in the notification service using JavaMailSender to send emails for events such as transaction initiation, transaction completion, wallet creation, and user creation.
+
+Summary
+
+Transaction Service Security Enhancement
+The meeting focused on the development of a transaction service and wallet functionality. The team discussed the current code flow, where a user's wallet is updated upon creation, and transactions are initiated through a service that publishes events for wallet updates. They identified that the transaction service currently lacks security and needs to be enabled with Spring Security to authenticate users. The instructor proposed reusing the user service component and creating an abstract user class to handle authentication without creating a separate user table for the transaction service.
+
+
+User Service Integration in Transactions
+The discussion focused on integrating user service functionality into the transaction service through an abstract user class. The transaction service will make API calls to the user service to handle authentication, though these calls are currently unsecured. The speaker demonstrated how to set up a REST template to make these API calls and explained that in a real-world scenario, secure communication would be required using tokens or username/password authentication.
+
+
+Microservices Security Implementation Discussion
+The discussion focused on implementing security mechanisms for microservices, with GeeksforGeeks explaining that each service should handle its own security, including authorizers and permissions, while sharing a common user service for user details. They created a new user utils module to handle user entities and abstract user classes, which was used to refactor the user service and transaction service to reduce bean duplication. After making these changes, GeeksforGeeks successfully ran the transaction service and wallet service, confirming that the database tables were created and empty, ready for fresh data insertion.
+
+
+User Authentication Error Resolution
+The developer encountered a 401 unauthorized error when creating users and traced it to an issue with abstract user inheritance. They decided to remove the user class entirely and use abstract user everywhere, making necessary changes to the transaction service to handle sender IDs from the authentication context. After implementing these changes and dropping and recreating the tables, the system now successfully creates users with wallets and transactions, and allows logging in and sending money between users.
+
+
+API Integration Service Issues
+The team discussed issues with the transaction service and user service integration. They identified that the problem was due to a mismatch between the API endpoint in the transaction service and the user service config, which expected a different authentication method. To resolve this, they decided to create two separate APIs: one for internal users (which would be public) and another for user details (which would require authentication). They also planned to modify the user controller to handle these different API paths.
+
+
+Spring Security Implementation Discussion
+The team discussed implementing Spring Security in their application, focusing on user authentication and data conversion between services. They encountered and resolved issues with converting user details from JSON to the AbstractUser class, ultimately creating a custom UserResponse class to handle the conversion. The discussion then shifted to the use of the @Transactional annotation for managing database transactions, with Swathi explaining the advantages of using a single atomic operation versus multiple separate database updates.
+
+
+Spring Boot Transactions Overview
+GeeksforGeeks explained the concept of transactions in Spring Boot, discussing when to use transactional annotations and the differences between atomic functions and transactional blocks. They clarified that if a transaction fails, all changes are rolled back, and demonstrated how nested transactions work. Swathi asked about partial transaction rollback, but GeeksforGeeks suggested that either all changes are rolled back or none are, with no middle ground. They also introduced the concepts of propagation and isolation levels in transactions. Finally, GeeksforGeeks encouraged participants to explore sending email notifications using Java Mail Sender in their major project to enhance its functionality.
