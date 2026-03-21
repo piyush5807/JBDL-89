@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -114,6 +115,7 @@ public class TransactionService {
 
     }
 
+    @Transactional
     private String returnTxn(Transaction transaction) throws BadRequestException {
 
         /**
@@ -124,8 +126,8 @@ public class TransactionService {
          * Step 5: Complete the txn
          */
 
-        Book book = this.bookService.findById(transaction.getBook().getId());
-        Student student = this.studentService.findById(transaction.getStudent().getId());
+        Book book = this.bookService.findById(transaction.getBook().getId()); // db safe operations
+        Student student = this.studentService.findById(transaction.getStudent().getId()); // db safe operations
         if(book == null || student == null || book.getStudent() == null || !book.getStudent().getId().equals(student.getId())){
             logger.warn("Book is not assigned to this student");
             throw new BadRequestException("Book is not assigned to this student");
@@ -136,18 +138,18 @@ public class TransactionService {
         transaction.setDueDate(issueTxn.getDueDate());
 
         transaction.setFine(fine);
-        Transaction savedTxn = this.transactionRepository.save(transaction);
+        Transaction savedTxn = this.transactionRepository.save(transaction); // update in txn table
 
         try {
 
             book.setStudent(null); // unassigning the book in the object and then saving it in the db in next row
-            this.bookService.add(book);
+            this.bookService.add(book); // book table update
             savedTxn.setTransactionStatus(TransactionStatus.SUCCESS);
 
         }catch (Exception e){
             transaction.setTransactionStatus(TransactionStatus.FAILED);
         }finally {
-            this.transactionRepository.save(savedTxn);
+            this.transactionRepository.save(savedTxn); // txn table
         }
 
         return savedTxn.getExternalTxnId();

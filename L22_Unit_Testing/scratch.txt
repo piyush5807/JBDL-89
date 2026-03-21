@@ -1,0 +1,28 @@
+
+@Transactional
+function(){
+
+    Step 1 : Update in txn table
+    try{
+    Step 2 : Update in book table
+    }catch(Exception e){
+        Rollback step 1
+    }
+    try{
+        Step 3 : Update in txn table
+    }catch(Exception){
+        Rollback Step 2
+        Rollback Step 1
+    }
+
+
+    Step 1 : Successful
+
+    Step 2 : Fails
+
+
+    What all options do you have ?
+
+    Rollback Step 1 manually
+
+}
